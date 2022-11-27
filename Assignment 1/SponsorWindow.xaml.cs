@@ -9,13 +9,25 @@ public partial class SponsorWindow : Window
 {
     private readonly ISponsorRepository _sponsorRepository = new SponsorRepository();
 
-    private void Add_Click(object sender, RoutedEventArgs e)
+    public SponsorWindow()
     {
+        InitializeComponent();
+    }
+
+    private void ADD_SPONSOR(object sender, RoutedEventArgs e)
+    {
+        // check if money is double
+        if (!double.TryParse(Money.Text, out var money))
+        {
+            MessageBox.Show("Money must be a number");
+            return;
+        }
+
         _sponsorRepository.create(new Sponsor()
         {
-            Money = double.Parse(MoneyBox.Text),
-            Name = SponsorNameBox.Text
+            Name = Name.Text,
+            Money = int.Parse(Money.Text),
         });
-        MessageBox.Show("Sponsor added");
+        this.Close();
     }
 }

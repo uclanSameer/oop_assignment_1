@@ -17,7 +17,7 @@ public class ParticipantDetails
     [MinLength(10)]
     [MaxLength(10)]
     [Required]
-    public int PhoneNumber { get; set; }
+    public long PhoneNumber { get; set; }
 
     [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "The Email is not valid")]
     public string EmailAddress { get; set; }

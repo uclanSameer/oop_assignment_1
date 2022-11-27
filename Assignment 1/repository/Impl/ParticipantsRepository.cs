@@ -22,6 +22,12 @@ public class ParticipantsRepository : IParticipantsRepository, IDisposable
                ?? throw new NotImplementedException();
     }
 
+    public ParticipantDetails getParticipant(string username)
+    {
+        return _context.ParticipantsDetails.FirstOrDefault(details => details.FullName == username)
+               ?? throw new NotImplementedException();
+    }
+
     public void updateParticipant(ParticipantDetails participant)
     {
         _context.ParticipantsDetails.Update(participant);

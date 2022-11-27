@@ -10,6 +10,7 @@ public interface IVolunteerRepository
     void create(VolunteerDetails volunteer);
 
     VolunteerDetails read(int id);
+    VolunteerDetails read(string participantId);
 
     void update(VolunteerDetails volunteer);
 

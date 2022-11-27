@@ -1,0 +1,71 @@
+﻿<Window x:Class="Assignment_1.DashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Assignment_1"
+        mc:Ignorable="d"
+        Title="DashboardWindow" Height="450" Width="800">
+    <Grid>
+        <!-- Dashboard with welcome message -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Welcome " FontSize="20" FontWeight="Bold" />
+                <TextBlock Margin="10, 0" Name="UsernameBlock" Text="" FontSize="20" FontWeight="Bold" />
+            </StackPanel>
+
+            <StackPanel Name="Runner" Orientation="Horizontal">
+                <TextBlock Text="Runner " Margin="10, 0,0,0" FontWeight="Bold"></TextBlock>
+                <TextBlock Name="RunnerBlock" Text="" Margin="10, 0, 0, 0"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical">
+                <StackPanel Name="Costume" Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Costume " Margin="10, 0,0,0" FontWeight="Bold"></TextBlock>
+                    <TextBlock Name="CostumeBlock" Text="" Margin="10, 0, 0, 0"></TextBlock>
+                </StackPanel>
+
+                <StackPanel Name="Sponsor" Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Sponsor " Margin="10, 0,0,0" FontWeight="Bold"></TextBlock>
+                    <TextBlock Name="SponsorBlock" Text="" Margin="10, 0, 0, 0"></TextBlock>
+                </StackPanel>
+
+                <StackPanel Name="Amount" Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Amount " Margin="10, 0,0,0" FontWeight="Bold"></TextBlock>
+                    <TextBlock Name="AmountBlock" Text="" Margin="10, 0, 0, 0"></TextBlock>
+                </StackPanel>
+
+                <StackPanel Name="Result" Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Result status " Margin="10, 0,0,0" FontWeight="Bold"></TextBlock>
+                    <TextBlock Name="ResultBlock" Text="" Margin="10, 0, 0, 0"></TextBlock>
+                </StackPanel>
+                
+                <StackPanel Name="WorldRank" Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="World Rank: " Margin="10, 0,0,0" FontWeight="Bold"></TextBlock>
+                    <TextBlock Name="WorldRankBlock" Text="" Margin="10, 0, 0, 0"></TextBlock>
+                </StackPanel>
+                
+                <StackPanel Name="Volunteer" Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Volunteer type: " Margin="10, 0,0,0" FontWeight="Bold"></TextBlock>
+                    <TextBlock Name="VolunteerType" Text="" Margin="10, 0, 0, 0"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+            <Button Name="UpdatePosition" Click="Update_Position" Content="Update Position" Width="100" Height="50"
+                    Margin="10" />
+            <Button Name="PrintCertificate" Click="PrintCertificate_OnClick" Content="Print certificate" Width="100"
+                    Height="50" Margin="10" />
+        </StackPanel>
+
+
+    </Grid>
+</Window>

@@ -10,6 +10,8 @@ namespace Assignment_1;
 
 public partial class RegisterWindow : Window
 {
+    private readonly ISponsorRepository _sponsorRepository = new SponsorRepository();
+
     private string _user = "";
     private string _password = "";
     private string _rePassword = "";
@@ -27,7 +29,11 @@ public partial class RegisterWindow : Window
         volunteerListBox.Items.Add("First Aid");
         volunteerListBox.Items.Add("Drink Station");
 
-        ISponsorRepository sponsorRepository = new SponsorRepository();
+        updateSponsor(_sponsorRepository);
+    }
+
+    private void updateSponsor(ISponsorRepository sponsorRepository)
+    {
         var sponsors = sponsorRepository.findAll().ToList();
 
         SponsorListBox.ItemsSource = sponsors;
@@ -54,6 +60,7 @@ public partial class RegisterWindow : Window
                 var userDetails = new UserDetails() {Username = _user, Password = _password};
                 if (checkVolunteer.IsChecked == true)
                 {
+                    userDetails.Type = "Volunteer";
                     _volunteerType = volunteerListBox.SelectedItem.ToString() ?? string.Empty;
                     Participant volunteer =
                         new Volunteer(_user, _email, int.Parse(_phone), _address, _volunteerType);
@@ -64,21 +71,24 @@ public partial class RegisterWindow : Window
                 }
                 else if (checkAmateur.IsChecked == true)
                 {
+                    userDetails.Type = Constants.Amateur;
                     Participant amateur =
                         new AmateurRunner(
                             _user, _address,
                             int.Parse(_phone), _email,
-                            RankType.AMATEURE, Status.NOT_STARTED, 0, (Sponsor) SponsorListBox.SelectedItem, "No Team");
+                            RankType.AMATEURE, Status.NOT_STARTED, 0, (Sponsor) SponsorListBox.SelectedItem,
+                            costumeBox.Text);
                     service.save(amateur, userDetails);
                     MessageBox.Show("Amateur Registered Successfully");
                     Close();
                 }
                 else if (checkProfessional.IsChecked == true)
                 {
+                    userDetails.Type = Constants.Professional;
                     Participant professional =
                         new ProfessionalRunner(
                             _user, _address,
-                            int.Parse(_phone), _email,
+                            long.Parse(_phone), _email,
                             RankType.PROFFETIONAL, Status.NOT_STARTED, 0, int.Parse(professionalRankTextBox.Text
                             ));
                     service.save(professional, userDetails);
@@ -154,5 +164,6 @@ public partial class RegisterWindow : Window
     {
         Window sponsorWindow = new SponsorWindow();
         sponsorWindow.Show();
+        updateSponsor(_sponsorRepository);
     }
 }

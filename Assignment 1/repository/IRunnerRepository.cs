@@ -10,6 +10,7 @@ public interface IRunnerRepository
     void create(RunnerDetails runner);
 
     RunnerDetails read(int id);
+    RunnerDetails read(string ParticipantId);
 
     void update(RunnerDetails runner);
 

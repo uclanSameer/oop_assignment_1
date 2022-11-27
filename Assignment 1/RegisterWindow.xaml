@@ -43,7 +43,7 @@
                 <!-- input for costume and select sponsor  -->
                 <StackPanel Name="AmateurPanel" Visibility="Collapsed" Margin="10,10,10,10">
                     <TextBlock Text="Fill in your name of the costume" Margin="10,10,10,10" />
-                    <TextBox x:Name="amateurTextBox" Margin="10,10,10,10" />
+                    <TextBox x:Name="costumeBox" Margin="10,10,10,10" />
 
                     <TextBlock Text="Select the sponsor from the list" Margin="10,10,10,10" />
                     <!-- List of items  -->

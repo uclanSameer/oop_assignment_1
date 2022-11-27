@@ -22,8 +22,16 @@ public partial class LoginWindow : Window
     {
         var user = _userService.findByUsername(Username.Text);
         var verifyHashedPassword = Crypto.VerifyHashedPassword(user.Password, Password.Password);
-        MessageBox.Show(verifyHashedPassword
-            ? "Login successful"
-            : "Login failed");
+
+        if (verifyHashedPassword)
+        {
+            var mainWindow = new DashboardWindow(user);
+            mainWindow.Show();
+            Close();
+        }
+        else
+        {
+            MessageBox.Show("Login failed");
+        }
     }
 }

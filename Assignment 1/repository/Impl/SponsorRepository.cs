@@ -16,7 +16,7 @@ public class SponsorRepository : ISponsorRepository, IDisposable
         _context.SaveChanges();
     }
 
-    public Sponsor read(string id)
+    public Sponsor read(string? id)
     {
         return _context.Sponsors.FirstOrDefault(sponsor => sponsor.SponsorId == id) ??
                throw new NotImplementedException();

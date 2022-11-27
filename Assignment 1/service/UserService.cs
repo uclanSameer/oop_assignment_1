@@ -132,7 +132,8 @@ public class UserService : IUserService
         {
             // hash the password before saving it for security reasons
             Password = Crypto.HashPassword(userDetails.Password),
-            Username = userDetails.Username
+            Username = userDetails.Username,
+            Type = userDetails.Type
         };
     }
 }

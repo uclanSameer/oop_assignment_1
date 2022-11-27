@@ -9,7 +9,7 @@ public interface ISponsorRepository
 {
     void create(Sponsor sponsor);
 
-    Sponsor read(string id);
+    Sponsor read(string? id);
 
     Sponsor[] findAll();
 

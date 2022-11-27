@@ -13,6 +13,8 @@ public class User
 
     [StringLength(20)] [Required] public string Username { get; set; }
 
+    [Required] public string Type { get; set; }
+
     [Required] public string Password { get; set; }
 
     public ParticipantDetails ParticipantDetails { get; set; }

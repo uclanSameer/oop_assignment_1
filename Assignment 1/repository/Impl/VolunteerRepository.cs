@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Assignment_1.data;
 
 namespace Assignment_1.repository.Impl;
@@ -17,6 +18,12 @@ public class VolunteerRepository : IVolunteerRepository, IDisposable
     public VolunteerDetails read(int id)
     {
         return _context.VolunteerDetails.Find(id) ?? throw new NotImplementedException();
+    }
+
+    public VolunteerDetails read(string participantId)
+    {
+        return _context.VolunteerDetails.FirstOrDefault(details => details.ParticipantId == participantId) ??
+               throw new NotImplementedException();
     }
 
     public void update(VolunteerDetails volunteer)
