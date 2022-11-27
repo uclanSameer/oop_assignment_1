@@ -2,9 +2,9 @@
 
 public class AmateurRunner : Runner
 {
-    public Sponsor Sponsor { get; set; }
+    public Sponsor Sponsor { get; }
 
-    public string Costume { get; set; }
+    public string Costume { get; }
 
     //constructor
     public AmateurRunner(string fullName, string address, int phoneNumber, string emailAddress, RankType rankType,

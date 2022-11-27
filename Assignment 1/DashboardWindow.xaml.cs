@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Assignment_1.data;
 using Assignment_1.repository;
 using Assignment_1.repository.Impl;
@@ -12,70 +13,97 @@ public partial class DashboardWindow : Window
     private readonly IParticipantsRepository _participantsRepository = new ParticipantsRepository();
     private readonly ISponsorRepository _sponsorRepository = new SponsorRepository();
 
+    private readonly RunnerDetails _runnerDetails;
+    private readonly ParticipantDetails _participantDetails;
+    private readonly VolunteerDetails _volunteerDetails;
+    private readonly User user;
+    private Sponsor _sponsor;
+
     public DashboardWindow(User user)
     {
         InitializeComponent();
-        var participantDetails = _participantsRepository.getParticipant(user.Username);
+        this.user = user;
+        _participantDetails = _participantsRepository.getParticipant(user.Username);
         UsernameBlock.Text = user.Username;
         if (user.Type == Constants.Volunteer)
         {
-            Runner.Visibility = Visibility.Collapsed;
-            Costume.Visibility = Visibility.Collapsed;
-            Sponsor.Visibility = Visibility.Collapsed;
-            Amount.Visibility = Visibility.Collapsed;
-            Result.Visibility = Visibility.Collapsed;
-            WorldRank.Visibility = Visibility.Collapsed;
-            Volunteer.Visibility = Visibility.Visible;
-
-            var volunteerDetails = _volunteerRepository.read(participantDetails.ParticipantDetailsId);
-            VolunteerType.Text = volunteerDetails.VolunteerType;
-
-            UpdatePosition.Visibility = Visibility.Collapsed;
+            _volunteerDetails = _volunteerRepository.read(_participantDetails.ParticipantDetailsId);
+            HandleVolunteer();
         }
         else
         {
-            var runnerDetails = _runnerRepository.read(participantDetails.ParticipantDetailsId);
+            _runnerDetails = _runnerRepository.read(_participantDetails.ParticipantDetailsId);
             if (user.Type == Constants.Amateur)
             {
-                Runner.Visibility = Visibility.Visible;
-                Costume.Visibility = Visibility.Visible;
-                Sponsor.Visibility = Visibility.Visible;
-                Amount.Visibility = Visibility.Visible;
-                Result.Visibility = Visibility.Visible;
-                Volunteer.Visibility = Visibility.Collapsed;
-                WorldRank.Visibility = Visibility.Collapsed;
-
-                ResultBlock.Text = runnerDetails.Status.ToString();
-                CostumeBlock.Text = runnerDetails.Costume;
-                RunnerBlock.Text = "Runner" + runnerDetails.RunnerId;
-                var sponsor = _sponsorRepository.read(runnerDetails.SponsorId);
-                SponsorBlock.Text = sponsor.Name;
-                AmountBlock.Text = sponsor.Money.ToString();
+                HandleAmateur();
             }
             else if (user.Type == Constants.Professional)
             {
-                Runner.Visibility = Visibility.Visible;
-                Costume.Visibility = Visibility.Collapsed;
-                Sponsor.Visibility = Visibility.Collapsed;
-                Amount.Visibility = Visibility.Collapsed;
-                Result.Visibility = Visibility.Visible;
-                Volunteer.Visibility = Visibility.Collapsed;
-                WorldRank.Visibility = Visibility.Visible;
-
-                ResultBlock.Text = runnerDetails.Status.ToString();
-                WorldRankBlock.Text = runnerDetails.WorldRank.ToString();
-                RunnerBlock.Text = "Runner" + runnerDetails.RunnerId;
+                HandleProfessional();
             }
         }
+    }
+
+    private void HandleProfessional()
+    {
+        Runner.Visibility = Visibility.Visible;
+        Costume.Visibility = Visibility.Collapsed;
+        Sponsor.Visibility = Visibility.Collapsed;
+        Amount.Visibility = Visibility.Collapsed;
+        Result.Visibility = Visibility.Visible;
+        Volunteer.Visibility = Visibility.Collapsed;
+        WorldRank.Visibility = Visibility.Visible;
+
+        ResultBlock.Text = _runnerDetails.Status.ToString();
+        WorldRankBlock.Text = _runnerDetails.WorldRank.ToString();
+        RunnerBlock.Text = "Runner" + _runnerDetails.RunnerId;
+    }
+
+    private void HandleAmateur()
+    {
+        Runner.Visibility = Visibility.Visible;
+        Costume.Visibility = Visibility.Visible;
+        Sponsor.Visibility = Visibility.Visible;
+        Amount.Visibility = Visibility.Visible;
+        Result.Visibility = Visibility.Visible;
+        Volunteer.Visibility = Visibility.Collapsed;
+        WorldRank.Visibility = Visibility.Collapsed;
+
+        ResultBlock.Text = _runnerDetails.Status.ToString();
+        CostumeBlock.Text = _runnerDetails.Costume;
+        RunnerBlock.Text = "Runner" + _runnerDetails.RunnerId;
+        _sponsor = _sponsorRepository.read(_runnerDetails.SponsorId);
+        SponsorBlock.Text = _sponsor.Name;
+        AmountBlock.Text = _sponsor.Money.ToString();
+    }
+
+    private void HandleVolunteer()
+    {
+        Runner.Visibility = Visibility.Collapsed;
+        Costume.Visibility = Visibility.Collapsed;
+        Sponsor.Visibility = Visibility.Collapsed;
+        Amount.Visibility = Visibility.Collapsed;
+        Result.Visibility = Visibility.Collapsed;
+        WorldRank.Visibility = Visibility.Collapsed;
+        Volunteer.Visibility = Visibility.Visible;
+
+        VolunteerType.Text = _volunteerDetails.VolunteerType;
+
+        UpdatePosition.Visibility = Visibility.Collapsed;
     }
 
     private void Update_Position(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        Window updatePositionWindow = new UpdateDetailsWindow(_runnerDetails, _runnerRepository);
+        updatePositionWindow.Show();
+        Close();
     }
 
     private void PrintCertificate_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        Window printCertificateWindow =
+            new PrintWindow(_runnerDetails, _participantDetails, _volunteerDetails, _sponsor, user);
+        printCertificateWindow.Show();
+        Close();
     }
 }

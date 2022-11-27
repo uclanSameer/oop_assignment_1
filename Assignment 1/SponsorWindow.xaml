@@ -21,7 +21,7 @@
             <TextBox Name="Name"  Margin="10,10,10,10"/>
             <TextBlock Text="Money" Margin="10,10,10,10"/>
             <TextBox Name="Money" Margin="10,10,10,10"/>
-            <Button Name="Add_Button" Content="Add Sponsor" Margin="10,10,10,10" Click="ADD_SPONSOR"/>
+            <Button Name="AddButton" Content="Add Sponsor" Margin="10,10,10,10" Click="ADD_SPONSOR"/>
         </StackPanel>
     </Grid>
 </Window>

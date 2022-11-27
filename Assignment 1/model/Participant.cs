@@ -2,10 +2,10 @@
 
 public class Participant
 {
-    public string FullName { get; set; }
-    public string Address { get; set; }
-    public long PhoneNumber { get; set; }
-    public string EmailAddress { get; set; }
+    public string FullName { get; }
+    public string Address { get; }
+    public long PhoneNumber { get; }
+    public string EmailAddress { get; }
 
     //constructor
     protected Participant(string fullName, string address, long phoneNumber, string emailAddress)
