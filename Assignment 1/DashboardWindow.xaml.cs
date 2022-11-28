@@ -23,7 +23,7 @@ public partial class DashboardWindow : Window
     {
         InitializeComponent();
         this.user = user;
-        _participantDetails = _participantsRepository.getParticipant(user.Username);
+        _participantDetails = _participantsRepository.getParticipantByUsername(user.Username);
         UsernameBlock.Text = user.Username;
         if (user.Type == Constants.Volunteer)
         {

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Documents;
 using Assignment_1.data;
 
 namespace Assignment_1.repository.Impl;
@@ -20,10 +22,15 @@ public class RunnerRepository : IRunnerRepository, IDisposable
         return _context.RunnerDetails.Find(id) ?? throw new NotImplementedException();
     }
 
-    public RunnerDetails read(string ParticipantId)
+    public RunnerDetails read(string participantId)
     {
-        return _context.RunnerDetails.FirstOrDefault(details => details.ParticipantDetailsId == ParticipantId) ??
+        return _context.RunnerDetails.FirstOrDefault(details => details.ParticipantDetailsId == participantId) ??
                throw new NotImplementedException();
+    }
+
+    public List<RunnerDetails> FindAllBySponsorId(string sponserId)
+    {
+        return _context.RunnerDetails.Where(details => details.SponsorId == sponserId).ToList();
     }
 
     public void update(RunnerDetails runner)

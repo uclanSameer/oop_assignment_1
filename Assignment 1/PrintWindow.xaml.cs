@@ -17,37 +17,64 @@ public partial class PrintWindow : Window
         _user = user;
         if (user.Type == Constants.Amateur)
         {
-            AmateurPanel.Visibility = Visibility.Visible;
-            ProfessionalPanel.Visibility = Visibility.Collapsed;
-            VolunteerPanel.Visibility = Visibility.Collapsed;
-            UserLabel.Content = user.Username;
-            setStatus(runnerDetails, StatusLabel);
-
-            SponsorLabel.Content = sponsor.Name + " sponsored your marathon";
-            CostumeLabel.Content = runnerDetails.Costume + " was your costumer.";
+            HandleAmateur(runnerDetails, sponsor, user);
         }
         else if (user.Type == Constants.Professional)
         {
-            AmateurPanel.Visibility = Visibility.Collapsed;
-            ProfessionalPanel.Visibility = Visibility.Visible;
-            VolunteerPanel.Visibility = Visibility.Collapsed;
-
-            ProfessionalUserLabel.Content = user.Username;
-            setStatus(runnerDetails, ProfessionalStatusLabel);
-            ProfessionalRankLabel.Content = "Your world rank is " + runnerDetails.WorldRank;
+            HandleProfessional(runnerDetails, user);
         }
         else
         {
-            AmateurPanel.Visibility = Visibility.Collapsed;
-            ProfessionalPanel.Visibility = Visibility.Collapsed;
-            VolunteerPanel.Visibility = Visibility.Visible;
-
-            VolunteerUserLabel.Content = user.Username;
-
-            VolunteerStatusLabel.Content = "participated as " + volunteerDetails.VolunteerType;
+            HandleVolunteer(volunteerDetails, user);
         }
     }
 
+    /**
+     * Builds Volunteer details panel
+     */
+    private void HandleVolunteer(VolunteerDetails volunteerDetails, User user)
+    {
+        AmateurPanel.Visibility = Visibility.Collapsed;
+        ProfessionalPanel.Visibility = Visibility.Collapsed;
+        VolunteerPanel.Visibility = Visibility.Visible;
+
+        VolunteerUserLabel.Content = user.Username;
+
+        VolunteerStatusLabel.Content = "participated as " + volunteerDetails.VolunteerType;
+    }
+
+    /**
+     * Builds the professional panel
+     */
+    private void HandleProfessional(RunnerDetails runnerDetails, User user)
+    {
+        AmateurPanel.Visibility = Visibility.Collapsed;
+        ProfessionalPanel.Visibility = Visibility.Visible;
+        VolunteerPanel.Visibility = Visibility.Collapsed;
+
+        ProfessionalUserLabel.Content = user.Username;
+        setStatus(runnerDetails, ProfessionalStatusLabel);
+        ProfessionalRankLabel.Content = "Your world rank is " + runnerDetails.WorldRank;
+    }
+
+    /**
+     * Build the UI for an amateur runner
+     */
+    private void HandleAmateur(RunnerDetails runnerDetails, Sponsor sponsor, User user)
+    {
+        AmateurPanel.Visibility = Visibility.Visible;
+        ProfessionalPanel.Visibility = Visibility.Collapsed;
+        VolunteerPanel.Visibility = Visibility.Collapsed;
+        UserLabel.Content = user.Username;
+        setStatus(runnerDetails, StatusLabel);
+
+        SponsorLabel.Content = sponsor.Name + " sponsored your marathon";
+        CostumeLabel.Content = runnerDetails.Costume + " was your costumer.";
+    }
+
+    /**
+     * Sets the status label based on the runner details
+     */
     private void setStatus(RunnerDetails runnerDetails, Label label)
     {
         if (runnerDetails.Status == Status.FINISHED)
@@ -64,6 +91,9 @@ public partial class PrintWindow : Window
         }
     }
 
+    /**
+     * This method is called when the user clicks print button
+     */
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         PrintDialog printDialog = new PrintDialog();
@@ -82,6 +112,9 @@ public partial class PrintWindow : Window
         }
     }
 
+    /**
+     * This method is called when the user clicks on the cancel button.
+     */
     private void CancelClick(object sender, RoutedEventArgs e)
     {
         Close();

@@ -13,8 +13,4 @@
       <PackageReference Include="System.Web.Helpers.Crypto" Version="3.2.3" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="image" />
-    </ItemGroup>
-
 </Project>

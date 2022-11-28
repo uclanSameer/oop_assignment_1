@@ -7,8 +7,8 @@ public interface IParticipantsRepository
 {
     ParticipantDetails createParticipant(ParticipantDetails participant);
 
-    ParticipantDetails getParticipant(int id);
-    ParticipantDetails getParticipant(string username);
+    ParticipantDetails getParticipant(string id);
+    ParticipantDetails getParticipantByUsername(string username);
 
     void updateParticipant(ParticipantDetails participant);
 

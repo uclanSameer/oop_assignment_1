@@ -16,13 +16,13 @@ public class ParticipantsRepository : IParticipantsRepository, IDisposable
         return _context.ParticipantsDetails.First(details => details.UserId == participant.UserId);
     }
 
-    public ParticipantDetails getParticipant(int id)
+    public ParticipantDetails getParticipant(string id)
     {
         return _context.ParticipantsDetails.Find(id)
                ?? throw new NotImplementedException();
     }
 
-    public ParticipantDetails getParticipant(string username)
+    public ParticipantDetails getParticipantByUsername(string username)
     {
         return _context.ParticipantsDetails.FirstOrDefault(details => details.FullName == username)
                ?? throw new NotImplementedException();

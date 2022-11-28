@@ -8,6 +8,4 @@ public interface IUserService
     void save(Participant participant, UserDetails userDetails);
 
     User findByUsername(string username);
-
-    Collection<Participant> findAll();
-}
+} 

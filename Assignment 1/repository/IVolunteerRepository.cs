@@ -7,6 +7,7 @@ namespace Assignment_1.repository;
  */
 public interface IVolunteerRepository
 {
+    
     void create(VolunteerDetails volunteer);
 
     VolunteerDetails read(int id);

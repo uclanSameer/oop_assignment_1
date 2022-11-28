@@ -27,7 +27,7 @@ namespace Assignment_1
         {
             InitializeComponent();
             _dataContext.Database.EnsureCreated();
-            
+
             // add sponsors only if there are none
             if (!_dataContext.Sponsors.Any())
             {
@@ -36,20 +36,27 @@ namespace Assignment_1
                     new Sponsor() {Money = 0, Name = "ITV Sport"}, new Sponsor() {Money = 0, Name = "Sky Sports"},
                     new Sponsor() {Money = 0, Name = "Paddy Power"}, new Sponsor() {Money = 0, Name = "Bet365"},
                     new Sponsor() {Money = 0, Name = "Horseracing TV"});
-                _dataContext.SaveChanges();   
+                _dataContext.SaveChanges();
             }
         }
 
-        private void openRegisterForm(object sender, RoutedEventArgs e)
+        private void OpenRegisterForm(object sender, RoutedEventArgs e)
         {
             Window registerForm = new RegisterWindow();
             registerForm.Show();
         }
 
-        private void openLoginForm(object sender, RoutedEventArgs e)
+        private void OpenLoginForm(object sender, RoutedEventArgs e)
         {
             Window loginForm = new LoginWindow();
             loginForm.Show();
+        }
+
+
+        private void PrintParticipants(object sender, RoutedEventArgs e)
+        {
+            new PrintParticipantsWindow().Show();
+            Close();
         }
     }
 }

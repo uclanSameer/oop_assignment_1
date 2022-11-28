@@ -1,4 +1,5 @@
-﻿using Assignment_1.data;
+﻿using System.Collections.Generic;
+using Assignment_1.data;
 
 namespace Assignment_1.repository;
 
@@ -11,6 +12,8 @@ public interface IRunnerRepository
 
     RunnerDetails read(int id);
     RunnerDetails read(string ParticipantId);
+
+    List<RunnerDetails> FindAllBySponsorId(string sponserId);
 
     void update(RunnerDetails runner);
 
