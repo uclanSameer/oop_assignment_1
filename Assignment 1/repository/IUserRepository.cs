@@ -8,8 +8,6 @@ namespace Assignment_1.repository;
  */
 public interface IUserRepository
 {
-    public User getUser(string username);
-    public User  addUser(User user);
-    public void updateUser(User user);
-    public void deleteUser(User user);
+    public User GetUser(string username);
+    public User  AddUser(User user);
 }

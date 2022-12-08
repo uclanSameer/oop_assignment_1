@@ -11,7 +11,7 @@ public class RunnerRepository : IRunnerRepository, IDisposable
     private readonly DataContext _context = new();
     private bool _disposed;
 
-    public void create(RunnerDetails runner)
+    public void Create(RunnerDetails runner)
     {
         _context.RunnerDetails.Add(runner);
         _context.SaveChanges();
@@ -22,7 +22,7 @@ public class RunnerRepository : IRunnerRepository, IDisposable
         return _context.RunnerDetails.Find(id) ?? throw new NotImplementedException();
     }
 
-    public RunnerDetails read(string participantId)
+    public RunnerDetails Read(string participantId)
     {
         return _context.RunnerDetails.FirstOrDefault(details => details.ParticipantDetailsId == participantId) ??
                throw new NotImplementedException();
@@ -31,18 +31,6 @@ public class RunnerRepository : IRunnerRepository, IDisposable
     public List<RunnerDetails> FindAllBySponsorId(string sponserId)
     {
         return _context.RunnerDetails.Where(details => details.SponsorId == sponserId).ToList();
-    }
-
-    public void update(RunnerDetails runner)
-    {
-        _context.RunnerDetails.Update(runner);
-        _context.SaveChanges();
-    }
-
-    public void delete(int id)
-    {
-        _context.RunnerDetails.Remove(read(id));
-        _context.SaveChanges();
     }
 
     public void Dispose()

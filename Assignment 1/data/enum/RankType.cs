@@ -1,6 +1,6 @@
 ﻿namespace Assignment_1.data;
 
-public enum RankType
+public enum  RankType
 {
     PROFFETIONAL,AMATEURE
 }

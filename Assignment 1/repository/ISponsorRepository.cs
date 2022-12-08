@@ -1,4 +1,5 @@
-﻿using Assignment_1.data;
+﻿using System.Collections.Generic;
+using Assignment_1.data;
 
 namespace Assignment_1.repository;
 
@@ -7,13 +8,9 @@ namespace Assignment_1.repository;
  */
 public interface ISponsorRepository
 {
-    void create(Sponsor sponsor);
+    void Create(Sponsor sponsor);
 
-    Sponsor read(string? id);
+    Sponsor Read(string? id);
 
-    Sponsor[] findAll();
-
-    void update(Sponsor sponsor);
-
-    void delete(int id);
+    IEnumerable<Sponsor> FindAll();
 }

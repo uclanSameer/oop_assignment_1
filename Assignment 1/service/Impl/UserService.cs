@@ -29,23 +29,23 @@ public class UserService : IUserService
         try
         {
             var user = UserHelper.BuildUser(userDetails);
-            var addedUser = _userRepository.addUser(user);
+            var addedUser = _userRepository.AddUser(user);
 
             var participantDetails = ParticipantHelper.BuildParticipantDetails(participant, userDetails, addedUser);
 
-            var details = _participantsRepository.createParticipant(participantDetails);
+            var details = _participantsRepository.CreateParticipant(participantDetails);
 
             if (participant.GetType() == typeof(Volunteer))
             {
                 var volunteerDetails = VolunteerHelper
                     .BuildVolunteerDetails(participant, details);
-                _volunteerRepository.create(volunteerDetails);
+                _volunteerRepository.Create(volunteerDetails);
             }
             else if (participant.GetType() == typeof(AmateurRunner) ||
                      participant.GetType() == typeof(ProfessionalRunner))
             {
                 var runnerDetails = RunnerHelper.BuildRunnerDetails((Runner) participant, details);
-                _runnerRepository.create(runnerDetails);
+                _runnerRepository.Create(runnerDetails);
             }
         }
         catch (Exception e)
@@ -55,8 +55,20 @@ public class UserService : IUserService
         }
     }
 
-    public User findByUsername(string username)
+
+    public User login(UserDetails userDetails)
     {
-        return _userRepository.getUser(username);
+        var user = _userRepository.GetUser(userDetails.Username);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+
+        if (!Crypto.VerifyHashedPassword(user.Password, userDetails.Password))
+        {
+            throw new Exception("Invalid password");
+        }
+
+        return user;
     }
 }

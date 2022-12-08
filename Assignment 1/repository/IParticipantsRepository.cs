@@ -5,12 +5,8 @@ namespace Assignment_1.repository;
 // repository interface for the entity class "ParticipantDetails"
 public interface IParticipantsRepository
 {
-    ParticipantDetails createParticipant(ParticipantDetails participant);
+    ParticipantDetails CreateParticipant(ParticipantDetails participant);
 
-    ParticipantDetails getParticipant(string id);
-    ParticipantDetails getParticipantByUsername(string username);
-
-    void updateParticipant(ParticipantDetails participant);
-
-    void deleteParticipant(int id);
+    ParticipantDetails GetParticipant(string id);
+    ParticipantDetails GetParticipantByUsername(string username);
 }

@@ -6,6 +6,6 @@ namespace Assignment_1.service;
 public interface IUserService
 {
     void save(Participant participant, UserDetails userDetails);
-
-    User findByUsername(string username);
+    
+    User login(UserDetails userDetails);
 } 

@@ -8,12 +8,7 @@ namespace Assignment_1.repository;
 public interface IVolunteerRepository
 {
     
-    void create(VolunteerDetails volunteer);
+    void Create(VolunteerDetails volunteer);
 
-    VolunteerDetails read(int id);
-    VolunteerDetails read(string participantId);
-
-    void update(VolunteerDetails volunteer);
-
-    void delete(int id);
+    VolunteerDetails Read(string participantId);
 }

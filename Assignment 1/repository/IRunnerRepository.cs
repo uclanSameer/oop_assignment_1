@@ -8,14 +8,10 @@ namespace Assignment_1.repository;
  */
 public interface IRunnerRepository
 {
-    void create(RunnerDetails runner);
+    void Create(RunnerDetails runner);
 
-    RunnerDetails read(int id);
-    RunnerDetails read(string ParticipantId);
+    RunnerDetails Read(string participantId);
 
     List<RunnerDetails> FindAllBySponsorId(string sponserId);
 
-    void update(RunnerDetails runner);
-
-    void delete(int id);
 }

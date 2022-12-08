@@ -34,7 +34,7 @@ public partial class RegisterWindow : Window
 
     private void updateSponsor(ISponsorRepository sponsorRepository)
     {
-        var sponsors = sponsorRepository.findAll().ToList();
+        var sponsors = sponsorRepository.FindAll().ToList();
 
         SponsorListBox.ItemsSource = sponsors;
     }

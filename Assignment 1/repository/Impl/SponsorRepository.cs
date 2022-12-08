@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assignment_1.data;
 
@@ -10,19 +11,19 @@ public class SponsorRepository : ISponsorRepository, IDisposable
 
     private bool _disposed;
 
-    public void create(Sponsor sponsor)
+    public void Create(Sponsor sponsor)
     {
         _context.Sponsors.Add(sponsor);
         _context.SaveChanges();
     }
 
-    public Sponsor read(string? id)
+    public Sponsor Read(string? id)
     {
         return _context.Sponsors.FirstOrDefault(sponsor => sponsor.SponsorId == id) ??
                throw new NotImplementedException();
     }
 
-    public Sponsor[] findAll()
+    public IEnumerable<Sponsor> FindAll()
     {
         return _context.Sponsors.ToArray();
     }

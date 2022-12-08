@@ -10,18 +10,18 @@ public class UserRepository : IUserRepository, IDisposable
 
     private bool _disposed;
 
-    public User getUser(string username)
+    public User GetUser(string username)
     {
         return _context
                    .Users.FirstOrDefault(u => u.Username == username) ??
                throw new InvalidOperationException();
     }
 
-    public User addUser(User user)
+    public User AddUser(User user)
     {
         _context.Users.Add(user);
         _context.SaveChanges();
-        return getUser(user.Username);
+        return GetUser(user.Username);
     }
 
     public void updateUser(User user)

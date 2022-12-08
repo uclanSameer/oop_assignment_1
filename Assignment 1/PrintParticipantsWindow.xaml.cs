@@ -16,7 +16,7 @@ public partial class PrintParticipantsWindow : Window
     public PrintParticipantsWindow()
     {
         InitializeComponent();
-        var sponsors = _sponsorRepository.findAll();
+        var sponsors = _sponsorRepository.FindAll();
         SponsorList.ItemsSource = sponsors;
     }
 

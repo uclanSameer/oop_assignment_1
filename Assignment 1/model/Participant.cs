@@ -1,8 +1,8 @@
 ﻿namespace Assignment_1.data;
 
-public class Participant
+public abstract class Participant
 {
-    public string FullName { get; }
+    private string FullName { get; }
     public string Address { get; }
     public long PhoneNumber { get; }
     public string EmailAddress { get; }

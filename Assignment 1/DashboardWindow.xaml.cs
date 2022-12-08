@@ -23,16 +23,16 @@ public partial class DashboardWindow : Window
     {
         InitializeComponent();
         this.user = user;
-        _participantDetails = _participantsRepository.getParticipantByUsername(user.Username);
+        _participantDetails = _participantsRepository.GetParticipantByUsername(user.Username);
         UsernameBlock.Text = user.Username;
         if (user.Type == Constants.Volunteer)
         {
-            _volunteerDetails = _volunteerRepository.read(_participantDetails.ParticipantDetailsId);
+            _volunteerDetails = _volunteerRepository.Read(_participantDetails.ParticipantDetailsId);
             HandleVolunteer();
         }
         else
         {
-            _runnerDetails = _runnerRepository.read(_participantDetails.ParticipantDetailsId);
+            _runnerDetails = _runnerRepository.Read(_participantDetails.ParticipantDetailsId);
             if (user.Type == Constants.Amateur)
             {
                 HandleAmateur();
@@ -72,7 +72,7 @@ public partial class DashboardWindow : Window
         ResultBlock.Text = _runnerDetails.Status.ToString();
         CostumeBlock.Text = _runnerDetails.Costume;
         RunnerBlock.Text = "Runner" + _runnerDetails.RunnerId;
-        _sponsor = _sponsorRepository.read(_runnerDetails.SponsorId);
+        _sponsor = _sponsorRepository.Read(_runnerDetails.SponsorId);
         SponsorBlock.Text = _sponsor.Name;
         AmountBlock.Text = _sponsor.Money.ToString();
     }

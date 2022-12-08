@@ -23,7 +23,7 @@ public partial class SponsorWindow
             return;
         }
 
-        _sponsorRepository.create(new Sponsor
+        _sponsorRepository.Create(new Sponsor
         {
             Name = Name.Text,
             Money = int.Parse(Money.Text)

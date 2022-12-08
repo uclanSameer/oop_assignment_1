@@ -4,6 +4,9 @@ namespace Assignment_1.helper;
 
 public static class ParticipantHelper
 {
+    /**
+     * Build a participant object from participant data and user data
+     */
     public static ParticipantDetails BuildParticipantDetails(Participant participant, UserDetails userDetails,
         User addedUser)
     {

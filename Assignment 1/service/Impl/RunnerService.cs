@@ -19,7 +19,7 @@ public class RunnerService : IRunnerService
         {
             return runners
                 .Select(runnerDetails =>
-                    _participantsRepository.getParticipant(runnerDetails.ParticipantDetailsId)
+                    _participantsRepository.GetParticipant(runnerDetails.ParticipantDetailsId)
                 ).ToList();
         }
 

@@ -9,18 +9,18 @@ public class VolunteerRepository : IVolunteerRepository, IDisposable
     private readonly DataContext _context = new();
     private bool _disposed = false;
 
-    public void create(VolunteerDetails volunteer)
+    public void Create(VolunteerDetails volunteer)
     {
         _context.VolunteerDetails.Add(volunteer);
         _context.SaveChanges();
     }
 
-    public VolunteerDetails read(int id)
+    public VolunteerDetails Read(int id)
     {
         return _context.VolunteerDetails.Find(id) ?? throw new NotImplementedException();
     }
 
-    public VolunteerDetails read(string participantId)
+    public VolunteerDetails Read(string participantId)
     {
         return _context.VolunteerDetails.FirstOrDefault(details => details.ParticipantId == participantId) ??
                throw new NotImplementedException();
