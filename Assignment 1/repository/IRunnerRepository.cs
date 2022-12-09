@@ -13,5 +13,7 @@ public interface IRunnerRepository
     RunnerDetails Read(string participantId);
 
     List<RunnerDetails> FindAllBySponsorId(string sponserId);
+    
+    void Update(RunnerDetails runner);
 
 }

@@ -25,7 +25,7 @@ public partial class UpdateDetailsWindow : Window
     {
         Enum.TryParse(PositionList.SelectedItem.ToString(), out Status myStatus);
         _runnerDetails.Status = myStatus;
-        _runnerRepository.update(_runnerDetails);
+        _runnerRepository.Update(_runnerDetails);
         Close();
     }
 }

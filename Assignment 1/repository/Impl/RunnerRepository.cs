@@ -32,6 +32,12 @@ public class RunnerRepository : IRunnerRepository, IDisposable
     {
         return _context.RunnerDetails.Where(details => details.SponsorId == sponserId).ToList();
     }
+    
+    public void Update(RunnerDetails runner)
+    {
+        _context.RunnerDetails.Update(runner);
+        _context.SaveChanges();
+    }
 
     public void Dispose()
     {
