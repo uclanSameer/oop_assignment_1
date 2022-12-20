@@ -4,6 +4,93 @@
              xmlns:local="clr-namespace:Assignment_1"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style x:Key="OkButton" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="DarkGreen" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Border.CornerRadius" Value="8" />
+        </Style>
+
+        <Style x:Key="CancelButton" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Background" Value="DarkRed" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Border.CornerRadius" Value="8" />
+        </Style>
+
+        <Style x:Key="TextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Brown" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Border.CornerRadius" Value="20" />
+        </Style>
+
+        <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Brown" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Border.CornerRadius" Value="20" />
+        </Style>
+
+        <Style x:Key="Label" TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Black" />
+        </Style>
+
+        <AlternationConverter x:Key="BackgroundConverter">
+            <SolidColorBrush Color="#19f39611" />
+            <SolidColorBrush Color="#19000000" />
+        </AlternationConverter>
+
+        <Style x:Key="ListBoxItem1" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Padding="7" SnapsToDevicePixels="True"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="Gray" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="Green" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="ListBoxItem" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListBoxItem1}">
+            <Setter Property="Background"
+                    Value="{Binding RelativeSource={RelativeSource Self},
+                 Path=(ItemsControl.AlternationIndex),
+                 Converter={StaticResource BackgroundConverter}}" />
+        </Style>
+
+
     </Application.Resources>
 </Application>

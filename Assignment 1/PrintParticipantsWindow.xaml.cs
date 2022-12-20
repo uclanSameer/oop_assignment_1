@@ -48,7 +48,7 @@ public partial class PrintParticipantsWindow : Window
         if (participantDetailsList.Count > 0)
         {
             UserPanel.Visibility = Visibility.Visible;
-            userListView.ItemsSource = participantDetailsList
+            UserListView.ItemsSource = participantDetailsList
                 .Select(details => details.FullName);
         }
         else

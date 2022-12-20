@@ -2,7 +2,7 @@
 
 public sealed class Constants
 {
-    public static readonly string Volunteer = "Volunteer";
-    public static readonly string Amateur = "Amateur";
-    public static readonly string Professional = "Professional";
+    public const string Volunteer = "Volunteer";
+    public const string Amateur = "Amateur";
+    public const string Professional = "Professional";
 }

@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Assignment_1"
         mc:Ignorable="d"
-        Title="PrintParticipantsWindow" Height="450" Width="800">
+        Title="Print Participants" Height="450" Width="800" Background="DarkGoldenrod">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -16,21 +16,33 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0" Content="Print" Click="Print_Click" />
-        <Button Grid.Row="0" Grid.Column="1" Content="Cancel" Click="Cancel_Click" />
+        <Button Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource OkButton}"
+                Content="Print" Click="Print_Click" />
+        <Button
+            Style="{StaticResource CancelButton}"
+            Grid.Row="0" Grid.Column="1" Content="Cancel" Click="Cancel_Click" />
 
+        <StackPanel Orientation="Horizontal">
+            
+        </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
 
             <Label Content="Select the sponsor"></Label>
 
-            <ListView x:Name="SponsorList" SelectionChanged="SponsorList_SelectionChanged"></ListView>
+            <ListBox
+                x:Name="SponsorList"
+                ItemContainerStyle="{StaticResource ListBoxItem}"
+                SelectionChanged="SponsorList_SelectionChanged"></ListBox>
         </StackPanel>
 
         <StackPanel Name="UserPanel" Grid.Row="1" Grid.Column="1" Visibility="Collapsed">
 
             <Label Content="List of user for sponsor"></Label>
 
-            <ListView x:Name="userListView"></ListView>
+            <ListBox
+                x:Name="UserListView"></ListBox>
         </StackPanel>
     </Grid>
 </Window>

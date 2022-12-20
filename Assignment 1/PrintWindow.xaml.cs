@@ -96,19 +96,19 @@ public partial class PrintWindow : Window
      */
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        PrintDialog printDialog = new PrintDialog();
+        var printDialog = new PrintDialog();
 
-        if (_user.Type == Constants.Amateur)
+        switch (_user.Type)
         {
-            printDialog.PrintVisual(AmateurPanel, "Amateur");
-        }
-        else if (_user.Type == Constants.Professional)
-        {
-            printDialog.PrintVisual(ProfessionalPanel, "Professional");
-        }
-        else
-        {
-            printDialog.PrintVisual(VolunteerPanel, "Volunteer");
+            case Constants.Amateur:
+                printDialog.PrintVisual(AmateurPanel, "Amateur");
+                break;
+            case Constants.Professional:
+                printDialog.PrintVisual(ProfessionalPanel, "Professional");
+                break;
+            default:
+                printDialog.PrintVisual(VolunteerPanel, "Volunteer");
+                break;
         }
     }
 

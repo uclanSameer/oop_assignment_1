@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Assignment_1"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="450" Width="400">
+        Title="Register" Height="450" Width="400" Background="DarkGoldenrod">
 
     <ScrollViewer VerticalScrollBarVisibility="Visible">
         <Grid>
@@ -23,38 +23,50 @@
                 <TextBlock Text="Register" FontSize="30" FontWeight="Bold" Margin="10,10,10,10" />
                 <TextBlock Text="Please fill in the following information to register" Margin="10,10,10,10" />
             </StackPanel>
+
             <!-- radio button with 3 choices -->
-            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,10,10">
+            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,10,10" Orientation="Vertical">
+                <TextBlock Text="My full name is :" Margin="10,10,10,10" />
+
+                <TextBox Style="{StaticResource TextBox}" x:Name="TxtFullName" Margin="10,10,10,10" />
+
                 <TextBlock Text="I am a" Margin="10,10,10,10" />
-                <RadioButton x:Name="checkVolunteer" Content="Volunteer" Checked="showHideFields"
+                <RadioButton x:Name="checkVolunteer" Content="Volunteer" Checked="ShowHideFields"
                              Margin="10,10,10,10" />
-                <RadioButton x:Name="checkAmateur" Content="Amateur Participant" Checked="showHideFields"
+                <RadioButton x:Name="checkAmateur" Content="Amateur Participant" Checked="ShowHideFields"
                              Margin="10,10,10,10" />
-                <RadioButton x:Name="checkProfessional" Content="Professional " Checked="showHideFields"
+                <RadioButton x:Name="checkProfessional" Content="Professional " Checked="ShowHideFields"
                              Margin="10,10,10,10" />
 
                 <!-- List of items  -->
                 <StackPanel Name="VolunteerList" Margin="10,10,10,10">
                     <TextBlock Text="I am interested in" Margin="10,10,10,10" />
-                    <ListBox x:Name="volunteerListBox" Margin="10,10,10,10">
+                    <ListBox
+                        ItemContainerStyle="{StaticResource ListBoxItem}"
+                        x:Name="VolunteerListBox" Margin="10,10,10,10">
                     </ListBox>
                 </StackPanel>
 
                 <!-- input for costume and select sponsor  -->
                 <StackPanel Name="AmateurPanel" Visibility="Collapsed" Margin="10,10,10,10">
                     <TextBlock Text="Fill in your name of the costume" Margin="10,10,10,10" />
-                    <TextBox x:Name="costumeBox" Margin="10,10,10,10" />
+                    <TextBox Style="{StaticResource TextBox}" x:Name="costumeBox" Margin="10,10,10,10" />
 
                     <TextBlock Text="Select the sponsor from the list" Margin="10,10,10,10" />
                     <!-- List of items  -->
-                    <ListBox x:Name="SponsorListBox" Margin="10,10,10,10" />
-                    <Button x:Name="SponsorButton" Content="Add Sponsor" Click="SponsorButton_OnClick" Margin="10,10,10,10" />
+                    <ListBox 
+                        ItemContainerStyle="{StaticResource ListBoxItem}"
+                        x:Name="SponsorListBox" Margin="10,10,10,10" />
+                    <Button x:Name="SponsorButton"
+                            Content="Add Sponsor"
+                            Click="SponsorButton_OnClick"
+                            Style="{StaticResource OkButton}" Margin="10,10,10,10" />
                 </StackPanel>
 
                 <!-- input for World ranking  -->
                 <StackPanel Name="ProfessionalPanel" Visibility="Collapsed" Margin="10,10,10,10">
                     <TextBlock Text="Fill in your world ranking" Margin="10,10,10,10" />
-                    <TextBox x:Name="professionalRankTextBox" Margin="10,10,10,10" />
+                    <TextBox Style="{StaticResource TextBox}" x:Name="ProfessionalRankTextBox" Margin="10,10,10,10" />
                 </StackPanel>
 
             </StackPanel>
@@ -63,38 +75,62 @@
                 <TextBlock Text="Username" Margin="10,10,10,10" />
                 <TextBox
                     Name="UsernameBox"
+                    Style="{StaticResource TextBox}"
                     Text="{Binding ElementName=_user, Mode= OneWay}"
                     Margin="10,10,10,10" />
 
                 <TextBlock Text="Password" Margin="10,10,10,10" />
                 <PasswordBox
+                    Style="{StaticResource PasswordBox}"
                     Name="PasswordBox"
-                    FontSize="35" />
+                    Margin="10,10,10,10" />
 
-                <TextBlock Text="Confirm Password" Margin="10,10,10,10" />
+                <TextBlock
+                    Text="Confirm Password" Margin="10,10,10,10" />
                 <PasswordBox
                     Name="RePasswordBox"
-                    FontSize="35" />
+                    Style="{StaticResource PasswordBox}"
+                    Margin="10,10,10,10" />
 
                 <TextBlock Text="Email" Margin="10,10,10,10" />
                 <TextBox
+                    Style="{StaticResource TextBox}"
                     Name="EmailBox"
                     Text="{Binding ElementName =_email, Mode=OneWay}"
                     Margin="10,10,10,10" />
 
                 <TextBlock Text="Phone Number" Margin="10,10,10,10" />
                 <TextBox
+                    Style="{StaticResource TextBox}"
                     Name="PhoneBox"
                     Text="{Binding ElementName =_phone, Mode=OneWay}"
                     Margin="10,10,10,10" />
 
                 <TextBlock Text="Address" Margin="10,10,10,10" />
                 <TextBox
+                    Style="{StaticResource TextBox}"
                     Name="AddressBox"
                     Text="{Binding ElementName =_address, Mode=OneWay}"
                     Margin="10,10,10,10" />
 
-                <Button Name="RegisterButton" Content="Register" Margin="10,10,10,10" Click="Register" />
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Style="{StaticResource OkButton}" Name="RegisterButton" Content="Register"
+                            Margin="10,10,10,10"
+                            Click="Register" />
+
+                    <Button Grid.Column="1" Style="{StaticResource CancelButton}"
+                            Name="CancelButton"
+                            Content="Cancel"
+                            Margin="10,10,10,10"
+                            Click="CancelButton_OnClick" />
+                </Grid>
+
             </StackPanel>
 
         </Grid>

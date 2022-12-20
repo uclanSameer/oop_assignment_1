@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Assignment_1.data;
 using Assignment_1.repository;
+using static System.Enum;
 
 namespace Assignment_1;
 
@@ -23,7 +23,7 @@ public partial class UpdateDetailsWindow : Window
 
     private void btnUpdate_Click(object sender, RoutedEventArgs e)
     {
-        Enum.TryParse(PositionList.SelectedItem.ToString(), out Status myStatus);
+        TryParse(PositionList.SelectedItem.ToString(), out Status myStatus);
         _runnerDetails.Status = myStatus;
         _runnerRepository.Update(_runnerDetails);
         Close();

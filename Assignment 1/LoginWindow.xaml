@@ -5,23 +5,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Assignment_1"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
+        Title="Login" Height="450" Width="800"
+        Background="DarkGoldenrod">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock Text="Login" FontSize="30" FontWeight="Bold" Margin="10,10,10,10"/>
-            <TextBlock Text="Username" Margin="10,10,10,10"/>
-            <TextBox Name="Username"  Margin="10,10,10,10"/>
-            <TextBlock Text="Password" Margin="10,10,10,10"/>
-            <PasswordBox Name="Password" Margin="10,10,10,10"/>
-            <Button Name="LoginButton" Content="Login" Margin="10,10,10,10" Click="LoginButton_Click"/>
+            <TextBlock Text="Login" FontSize="30" FontWeight="Bold" Margin="10,10,10,10" />
+            <TextBlock Text="Username" Margin="10,10,10,10" />
+            <TextBox Style="{StaticResource TextBox}" Name="Username" Margin="10,10,10,10" />
+            <TextBlock Text="Password" Margin="10,10,10,10" />
+            <PasswordBox Name="Password" Margin="10,10,10,10" Style="{StaticResource PasswordBox}" />
+            <Button Name="LoginButton" Content="Login" Margin="10,10,10,10"
+                    Style="{StaticResource OkButton}"
+                    Click="LoginButton_Click" />
+
         </StackPanel>
     </Grid>
 </Window>

@@ -18,6 +18,7 @@ public partial class RegisterWindow : Window
     private string _email = "";
     private string _phone = "";
     private string _address = "";
+    private string _fullName = "";
 
     private string _volunteerType = "";
 
@@ -25,14 +26,14 @@ public partial class RegisterWindow : Window
     {
         InitializeComponent();
         checkVolunteer.IsChecked = true;
-        volunteerListBox.Items.Add("Marshalling");
-        volunteerListBox.Items.Add("First Aid");
-        volunteerListBox.Items.Add("Drink Station");
+        VolunteerListBox.Items.Add("Marshalling");
+        VolunteerListBox.Items.Add("First Aid");
+        VolunteerListBox.Items.Add("Drink Station");
 
-        updateSponsor(_sponsorRepository);
+        UpdateSponsor(_sponsorRepository);
     }
 
-    private void updateSponsor(ISponsorRepository sponsorRepository)
+    private void UpdateSponsor(ISponsorRepository sponsorRepository)
     {
         var sponsors = sponsorRepository.FindAll().ToList();
 
@@ -47,58 +48,82 @@ public partial class RegisterWindow : Window
         _email = EmailBox.Text;
         _phone = PhoneBox.Text;
         _address = AddressBox.Text;
+        _fullName = TxtFullName.Text;
+        
 
-        if (_user == "" || _password == "" || _rePassword == "" || _email == "" || _phone == "" || _address == "")
+        if (_user == "" || _password == "" || _rePassword == "" || _email == "" || _phone == "" || _address == "" || _fullName == "")
         {
             MessageBox.Show("Please fill all the fields");
         }
         else
         {
-            if (ValidateFields())
+            if (!ValidateFields()) return;
+            IUserService service = new UserService();
+            var userDetails = new UserDetails() {Username = _user, Password = _password};
+            if (checkVolunteer.IsChecked == true)
             {
-                IUserService service = new UserService();
-                var userDetails = new UserDetails() {Username = _user, Password = _password};
-                if (checkVolunteer.IsChecked == true)
-                {
-                    userDetails.Type = "Volunteer";
-                    _volunteerType = volunteerListBox.SelectedItem.ToString() ?? string.Empty;
-                    Participant volunteer =
-                        new Volunteer(_user, _email, int.Parse(_phone), _address, _volunteerType);
-
-                    service.save(volunteer, userDetails);
-                    MessageBox.Show("Volunteer Registered Successfully");
-                    Close();
-                }
-                else if (checkAmateur.IsChecked == true)
-                {
-                    userDetails.Type = Constants.Amateur;
-                    Participant amateur =
-                        new AmateurRunner(
-                            _user, _address,
-                            int.Parse(_phone), _email,
-                            RankType.AMATEURE, Status.NOT_STARTED, 0, (Sponsor) SponsorListBox.SelectedItem,
-                            costumeBox.Text);
-                    service.save(amateur, userDetails);
-                    MessageBox.Show("Amateur Registered Successfully");
-                    Close();
-                }
-                else if (checkProfessional.IsChecked == true)
-                {
-                    userDetails.Type = Constants.Professional;
-                    Participant professional =
-                        new ProfessionalRunner(
-                            _user, _address,
-                            long.Parse(_phone), _email,
-                            RankType.PROFFETIONAL, Status.NOT_STARTED, 0, int.Parse(professionalRankTextBox.Text
-                            ));
-                    service.save(professional, userDetails);
-                    MessageBox.Show("Professional Registered Successfully");
-                    Close();
-                }
-
-                MessageBox.Show("Registration Successful");
+                HandleVolunteerRegistration(userDetails, service);
             }
+            else if (checkAmateur.IsChecked == true)
+            {
+                HandleAmateurRegistration(userDetails, service);
+            }
+            else if (checkProfessional.IsChecked == true)
+            {
+                HandleProfessionalRegistration(userDetails, service);
+            }
+
+            MessageBox.Show("Registration Successful");
         }
+    }
+
+    /**
+     * Handle the registration of a volunteer
+     */
+    private void HandleProfessionalRegistration(UserDetails userDetails, IUserService service)
+    {
+        userDetails.Type = Constants.Professional;
+        Participant professional =
+            new ProfessionalRunner(
+                _fullName, _address,
+                long.Parse(_phone), _email,
+                RankType.PROFFETIONAL, Status.NOT_STARTED, 0, int.Parse(ProfessionalRankTextBox.Text
+                ));
+        service.save(professional, userDetails);
+        MessageBox.Show("Professional Registered Successfully");
+        Close();
+    }
+
+    /**
+     * This method handles the registration of an amateur runner
+     */
+    private void HandleAmateurRegistration(UserDetails userDetails, IUserService service)
+    {
+        userDetails.Type = Constants.Amateur;
+        Participant amateur =
+            new AmateurRunner(
+                _fullName, _address,
+                int.Parse(_phone), _email,
+                RankType.AMATEURE, Status.NOT_STARTED, 0, (Sponsor) SponsorListBox.SelectedItem,
+                costumeBox.Text);
+        service.save(amateur, userDetails);
+        MessageBox.Show("Amateur Registered Successfully");
+        Close();
+    }
+
+    /**
+     * Handles Volunteer Registration
+     */
+    private void HandleVolunteerRegistration(UserDetails userDetails, IUserService service)
+    {
+        userDetails.Type = "Volunteer";
+        _volunteerType = VolunteerListBox.SelectedItem.ToString() ?? string.Empty;
+        Participant volunteer =
+            new Volunteer(_fullName, _email, int.Parse(_phone), _address, _volunteerType);
+
+        service.save(volunteer, userDetails);
+        MessageBox.Show("Volunteer Registered Successfully");
+        Close();
     }
 
     /**
@@ -107,10 +132,11 @@ public partial class RegisterWindow : Window
     private bool ValidateFields()
     {
         // checks if the password and re-password are the same
-        // if (_password != _rePassword)
-        // {
-        //     MessageBox.Show("Password and Re-Password are not the same");
-        // }
+        if (_password != _rePassword)
+        {
+            MessageBox.Show("Password and Re-Password are not the same");
+        }
+
         // checks if the email is valid
         if (!_email.Contains("@") || !_email.Contains("."))
         {
@@ -122,11 +148,6 @@ public partial class RegisterWindow : Window
         {
             MessageBox.Show("Phone number is not valid");
         }
-        // checks if the phone number is 10 digits
-        // else if (_phone.Length != 10)
-        // {
-        //     MessageBox.Show("Phone number is not valid");
-        // }
         else
         {
             return true;
@@ -138,7 +159,7 @@ public partial class RegisterWindow : Window
     /**
      * Show hide the fields in UI as per the radio button is checked
      */
-    private void showHideFields(object sender, RoutedEventArgs e)
+    private void ShowHideFields(object sender, RoutedEventArgs e)
     {
         if (checkVolunteer.IsChecked == true)
         {
@@ -164,6 +185,11 @@ public partial class RegisterWindow : Window
     {
         Window sponsorWindow = new SponsorWindow();
         sponsorWindow.Show();
-        updateSponsor(_sponsorRepository);
+        UpdateSponsor(_sponsorRepository);
+    }
+
+    private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

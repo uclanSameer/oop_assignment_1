@@ -2,7 +2,7 @@
 
 public abstract class Participant
 {
-    private string FullName { get; }
+    public string FullName { get; }
     public string Address { get; }
     public long PhoneNumber { get; }
     public string EmailAddress { get; }

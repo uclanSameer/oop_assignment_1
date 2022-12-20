@@ -14,7 +14,7 @@ public static class ParticipantHelper
         {
             Address = participant.Address,
             UserId = addedUser.UserId,
-            FullName = userDetails.Username,
+            FullName = participant.FullName,
             EmailAddress = participant.EmailAddress,
             PhoneNumber = participant.PhoneNumber
         };

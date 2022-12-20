@@ -8,5 +8,5 @@ public interface IParticipantsRepository
     ParticipantDetails CreateParticipant(ParticipantDetails participant);
 
     ParticipantDetails GetParticipant(string id);
-    ParticipantDetails GetParticipantByUsername(string username);
+    ParticipantDetails GetParticipantByUserId(string userId);
 }

@@ -22,9 +22,9 @@ public class ParticipantsRepository : IParticipantsRepository, IDisposable
                ?? throw new NotImplementedException();
     }
 
-    public ParticipantDetails GetParticipantByUsername(string username)
+    public ParticipantDetails GetParticipantByUserId(string userId)
     {
-        return _context.ParticipantsDetails.FirstOrDefault(details => details.FullName == username)
+        return _context.ParticipantsDetails.FirstOrDefault(details => details.UserId == userId)
                ?? throw new NotImplementedException();
     }
 

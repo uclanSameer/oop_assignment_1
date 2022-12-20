@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Assignment_1"
         mc:Ignorable="d"
-        Title="DashboardWindow" Height="450" Width="800">
+        Title="Dashboard" Height="450" Width="800" Background="DarkGoldenrod">
     <Grid>
         <!-- Dashboard with welcome message -->
         <Grid.RowDefinitions>
@@ -60,9 +60,15 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
-            <Button Name="UpdatePosition" Click="Update_Position" Content="Update Position" Width="100" Height="50"
+            <Button Name="UpdatePosition" 
+                    Click="Update_Position"
+                    Style="{StaticResource OkButton}"
+                    Content="Update Position" Width="100" Height="50"
                     Margin="10" />
-            <Button Name="PrintCertificate" Click="PrintCertificate_OnClick" Content="Print certificate" Width="100"
+            <Button Name="PrintCertificate" 
+                    Click="PrintCertificate_OnClick"
+                    Style="{StaticResource OkButton}"
+                    Content="Print certificate" Width="100"
                     Height="50" Margin="10" />
         </StackPanel>
 

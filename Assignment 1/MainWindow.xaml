@@ -5,21 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Welcome" Height="450" Width="800" Background="DarkGoldenrod">
     <Grid>
 
         <StackPanel Orientation="Vertical">
             <!-- bold big text aligned to center horizontally  -->
-        <TextBlock Text="Preston Marathon" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="Preston Marathon" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />
 
-        <!-- Login and register buttons which are aligned center of the screen -->
-            <Button x:Name="btn1" Content="Register" HorizontalAlignment="Center"
+            <!-- Login and register buttons which are aligned center of the screen -->
+            <Button x:Name="btn1"
+                    Style="{StaticResource OkButton}"
+                    Content="Register" HorizontalAlignment="Center"
                     Margin="0,50,0,0" Width="100" Height="50" Click="OpenRegisterForm" />
 
             <Button x:Name="btn2" Content="Login" HorizontalAlignment="Center"
+                    Style="{StaticResource OkButton}"
                     Margin="0,10,0,0" Width="100" Height="50" Click="OpenLoginForm" />
-            
+
             <Button x:Name="btn3" Content="Print Participants" HorizontalAlignment="Center"
+                    Style="{StaticResource OkButton}"
                     Margin="0,10,0,0" Width="100" Height="50" Click="PrintParticipants" />
         </StackPanel>
     </Grid>

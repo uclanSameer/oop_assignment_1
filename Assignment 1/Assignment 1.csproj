@@ -2,15 +2,21 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net6.0-windows</TargetFramework>
         <RootNamespace>Assignment_1</RootNamespace>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <TargetFramework>net6.0-windows</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.0-preview5" />
+      <PackageReference Include="NUnit" Version="3.13.3" />
       <PackageReference Include="System.Web.Helpers.Crypto" Version="3.2.3" />
+      <PackageReference Include="xunit" Version="2.4.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TestProject\TestProject.csproj" />
     </ItemGroup>
 
 </Project>
